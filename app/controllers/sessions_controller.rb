@@ -6,17 +6,13 @@ class SessionsController < ApplicationController
 
   end
 
+
   def create
-    @user = User.fin_by(username: params[:user][:username])
-    if @user && @user.authenticate(params[:user][:password])
-      session[:user_id] = @user.id
-      redirect_to books_path
-    else 
-      render :new
-    end
-    
+    #create a session here 
   end
 
+
+ 
   def home
   end
 
@@ -26,5 +22,6 @@ class SessionsController < ApplicationController
     redirect_to '/'
   end
 
-
+  
+end
 end
