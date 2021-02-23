@@ -1,5 +1,10 @@
 class Book < ApplicationRecord
-validates :name, presence: true
-has_many :user
-has_many :rating
+validates :title, presence: true
+has_many :users
+has_many :ratings
+
+def title_and_author
+  "#{self.title} - #{self.author}"
+end
+
 end
