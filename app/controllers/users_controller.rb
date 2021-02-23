@@ -2,33 +2,33 @@ class UsersController < ApplicationController
   # before_action :require_authorization, only: [:edit, :update]
 
 
-  # def index
-  #   @user = User.all
-  # end
+ def index
+    @users = User.all
+  end
 
   # #loading the signup form  
-  # def new
-  #   @user = User.new
-  # end
+  def new
+  @user = User.new
+  end
   
-  # def show 
-  # @ratings= Rating.all
-  # end
+  def show
+    @user = User.find(params[:id])
+  end
 
   # #signup
-  # def create
-  # @user = User.new(user_params)
-  # if @user.save
-  #   #login the user
-  #   #set the session
-  #   session[:user_id] = @user.id
-  #   flash[:notice] = "Account successfully created!  Welcome, #{@user.username}!"
-  #   redirect_to @user #can you use books_path why or why not
-  # else
-  #   flash[:error] = "Error: User not created: " + @user.errors.full_messages.to_sentence
-  #   render :new
-  # end
-  # end
+  def create
+  @user = User.new(user_params)
+  if @user.save
+    #login the user
+    #set the session
+    session[:user_id] = @user.id
+    flash[:notice] = "Account successfully created!  Welcome, #{@user.username}!"
+    redirect_to @user #can you use books_path why or why not
+  else
+    flash[:error] = "Error: User not created: " + @user.errors.full_messages.to_sentence
+    render :new
+  end
+  end
 
   # def update
   #   if @user.update(user_params)
@@ -52,9 +52,9 @@ class UsersController < ApplicationController
   #   @user = User.find_by(id: params[:id])
   # end
 
-  # def user_params
-  #   params.require(:user).permit(:username, :email, :password)
-  # end
+  def user_params
+   params.require(:user).permit(:username, :email, :password)
+  end
   
   # def require_authorization
   #   unless current_user.can_edit_user? @user

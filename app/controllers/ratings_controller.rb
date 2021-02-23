@@ -1,5 +1,18 @@
 class RatingsController < ApplicationController
 
+  def create
+    @rating = Rating.new(params[:ratings])
+
+    # @rating = current_user.ratings.build(rating_params(:number,:comment))
+    # if @rating.save
+    #   redirect_to rating_path(@rating)
+    # else
+    #   #insert flash message here 
+    #   render :new
+    # end
+  end
+
+  
   def index
     @ratings = Rating.all
   end
@@ -32,14 +45,6 @@ end
 #   @rating = Rating.new
 # end
 
-def create
-  @rating = current_user.ratings.build(rating_params(:number,:comment))
-  if @rating.save
-    redirect_to rating_path(@rating)
-  else
-    render :new
-  end
-end
 
 
 # def index
