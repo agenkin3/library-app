@@ -14,7 +14,7 @@ def edit
 end
 
 def update
-  @book = Book.find(params[:id])
+  @book = Book.find(params[:book][:title])
   @book.update(title:params[:book][:title], author:params[:book][:author])
   redirect_to book_path(@book)
 

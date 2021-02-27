@@ -5,12 +5,24 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   
   </head>
-
   <body>
+
+  <%= link_to("Ratings", ratings_path) %>
+  <%= link_to("Books", books_path) %>
+  <%= link_to("Logout", logout_path) %>
+  
+  
+  <hr>
+  
+  <% if flash[:message] %>
+  <div class="field_with_errors"> 
+  <%= flash[:message] %></div>
+  <% end %>
+
     <%= yield %>
-  </body>
+  </body>  
 </html>
+

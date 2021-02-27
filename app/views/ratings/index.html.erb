@@ -1,7 +1,10 @@
-<h1> Rating Index </h1>
-
-<ul> <% @ratings.each do |rating| %>
-<li> <% rating.number %> </li>
-<li> <% rating.comment %> </li>
-<% end %> <ul>
+<h1> Rating Index </h1> 
+<% @ratings.each do |rating| %> <br>
+Title: <%= rating.book.title %> 
+<br> 
+Rating: 
+<%= rating.number %>  
+<br>
+Additional Comment:  <%= rating.comment %> <br>
+<% end %> 
 
