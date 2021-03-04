@@ -1,9 +1,9 @@
 class RatingsController < ApplicationController
-  before_action :set_shoe, :redirect_if_not_owner, only: [:show, :edit, :update, :destroy]
+  #before_action :set_rating, :redirect_if_not_owner, only: [:show, :edit, :update, :destroy]
   
   def create
     @rating = Rating.new(rating_params)
-    @rating = current_user.shoes.build(rating_params)
+    @rating = current_user.ratings.build(rating_params)
 
     if @rating.save
       redirect_to rating_path(@rating)
@@ -25,8 +25,21 @@ class RatingsController < ApplicationController
   end
 
   def index
-    @ratings = Rating.all
-  end
+    #@ratings = Rating.all
+    #is this a nested route?
+    
+    if params[:book_id] && @book = Book.find_by_id(params[:book_id])
+    @ratings = @book.ratings.ordered_by_number
+    else 
+      @ratings = Rating.ordered_by_number
+    
+      #access just ratings of this book
+
+      #if so, we only want ratings of that book
+      #if not
+      #show all the ratings @ratings = Rating.ordered_by_number
+    end 
+    end
   
   def new
     @rating = Rating.new
@@ -54,22 +67,21 @@ class RatingsController < ApplicationController
     @rating = Rating.ordered_by_number.first
   end
 
+private
 
-  private
+  def set_rating
+    rating = Rating.find(params[:id])
+  end
 
   def rating_params
     params.require(:rating).permit(:number, :comment)
   end
 
-  def redirect_if_not_owner
-    if current_user != @rating.user
-      redirect_to user_path(current_user)
-    end
-  end
-
-    def set_shoe
-      shoe = Shoe.find(params[:id])
-    end
+  # def redirect_if_not_owner
+  #   if current_user != @rating.user
+  #     redirect_to user_path(current_user)
+  #   end
+  # end
 
 end
 

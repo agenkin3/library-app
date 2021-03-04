@@ -17,17 +17,29 @@ class UsersController < ApplicationController
 
   # #signup
   def create
-  @user = User.new(user_params)
-  if @user.save
-    #login the user
-    #set the session
-    session[:user_id] = @user.id
-    flash[:notice] = "Account successfully created!  Welcome, #{@user.username}!"
-    redirect_to @user #can you use books_path why or why not
-  else
-    flash[:error] = "Error: User not created: " + @user.errors.full_messages.to_sentence
+    @user = User.create(params.require(:user).permit(:email, :username,        
+   :password))
+   if @user.save
+   session[:user_id] = @user.id
+   #flash[:notice] = "Account successfully created!  Welcome, #{@user.username}!"
+   redirect_to users_path(@user)
+   else
+    #flash[:error] = "Error: User not created: " + @user.errors.full_messages.to_sentence
     render :new
-  end
+    end
+
+
+  # @user = User.new(user_params)
+  # if @user.save
+  #   #login the user
+  #   #set the session
+  #   session[:user_id] = @user.id
+  #   flash[:notice] = "Account successfully created!  Welcome, #{@user.username}!"
+  #   redirect_to @user #can you use books_path why or why not
+  # else
+  #   flash[:error] = "Error: User not created: " + @user.errors.full_messages.to_sentence
+  #   render :new
+  # end
   end
 
   # def update

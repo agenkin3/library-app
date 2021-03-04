@@ -5,8 +5,9 @@ class Rating < ApplicationRecord
   # scope :order_by_number, => {order(number: :desc)}
   
 
-  def self.order_by_number
+  def self.ordered_by_number
     self.order(number: :desc)
+    #@self.all.sort_by{|rating|rating.number}.last
   end
 
   def rating_attributes=(attr)
