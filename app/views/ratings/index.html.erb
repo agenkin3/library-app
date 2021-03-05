@@ -1,4 +1,4 @@
-<h1> Rating Index </h1> 
+<%= display_header(@book) %>
 <% @ratings.each do |rating| %> <br>
 Title: <%= rating.book.title %> 
 <br> 
@@ -9,3 +9,4 @@ Additional Comment:  <%= rating.comment %> <br>
 <% end %> 
 <br>
 <%= link_to("Create Rating", new_rating_path) %>
+
