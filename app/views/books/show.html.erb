@@ -1,5 +1,5 @@
-<h1> Books Show <h1>
-
 
  Title: <%= @book.title %> <br>
  Author: <%= @book.author %> <br>
+
+ <%= link_to("Make a new rating for #{@book.title}", new_book_rating_path(@book.id))  %>
