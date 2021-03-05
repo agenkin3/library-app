@@ -2,13 +2,13 @@ class RatingsController < ApplicationController
   #before_action :set_rating, :redirect_if_not_owner, only: [:show, :edit, :update, :destroy]
   
   def create
-    @rating = Rating.new(rating_params)
+    #@rating = Rating.new(rating_params)
     @rating = current_user.ratings.build(rating_params)
 
     if @rating.save
       redirect_to rating_path(@rating)
     else
-      @book = Book.find_by_id(@book)
+      @book = Book.find_by_id(:book_id) if params[:book_id]
       render :new
     # @rating = Rating.new
     # # if @rating.save
@@ -18,6 +18,25 @@ class RatingsController < ApplicationController
     #   render :new
     # end
     end
+  end
+
+  def new
+    @rating = Rating.new
+    #is this a nested route?
+    if params[:book_id] && @book = Book.find_by_id(params[:book_id])
+      #if so, we only want ratings of that book
+      #pre associating the rating to the book if you come from a nested form 
+      @ratings = @book.ratings.build
+      #if not
+    else 
+        @ratings = Rating.ordered_by_number
+      
+        #access just ratings of this book
+  
+        #if so, we only want ratings of that book
+        #if not
+        #show all the ratings @ratings = Rating.ordered_by_number
+      end 
   end
 
   def show
@@ -41,9 +60,7 @@ class RatingsController < ApplicationController
     end 
     end
   
-  def new
-    @rating = Rating.new
-  end
+
   
   def edit
     @rating = Rating.find(params[:id])

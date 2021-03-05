@@ -1,6 +1,9 @@
 <h1>Create a Rating</h1>
 
 <%= form_for(@rating) do |f| %>
+  <%= f.label :book %>
+  
+  <%= f.collection_select :book_id, Book.order(:title),:id,:title, include_blank: true %>
   <%= f.label :number %>
   <%= f.text_field :number%>
   <%= f.label :comment %>
