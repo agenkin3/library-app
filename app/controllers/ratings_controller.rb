@@ -2,24 +2,68 @@ class RatingsController < ApplicationController
   #before_action :set_rating, :redirect_if_not_owner, only: [:show, :edit, :update, :destroy]
   
   def create
-    @rating = Rating.new(rating_params)
-    
-    #@current_user.rating.build(rating_params)
-
+    @rating = current_user.ratings.build(rating_params)
     if @rating.save
       redirect_to rating_path(@rating)
     else
-      @book = Book.find_by_id(:book_id) if params[:book_id]
       render :new
-    # @rating = Rating.new
-    # # if @rating.save
+  end
+
+    # @book = Book.find(params[:id])
+    # @rating = Rating.find(params[:id])
+    # @rating = @book.ratings.build(rating_params)
+    # @rating.book_id = @book.id
+    # @rating.user_id = current_user.id 
+    # if @rating.save
+    #   respond_to do |f|
+    #     f.html {redirect_to book_path(@book)}
+    #     f.json {render json: @rating, status: 201}
+    #   end
+    # else
+    #   render 'books/show'
+    # end 
+  end 
+  #  #IDK HOW TO FIX THIS 
+  #  @rating = Rating.new(rating_params)
+  #  @rating
+  #  if @rating.save
+  #   redirect_to rating_path, notice: "Your rating was created"
+  #  else redirect_to ratings_path
+  # end
+
+
+
+#@rating = Rating.new(book_id: params[:book][:id], number:params[:rating][:number], comment:params[:rating][:comment])
+# @rating = Rating.new
+# @rating.user_id = session[:user_id]
+# if @rating.save
+# redirect_to rating_path
+# else
+# @rating.build
+# render :new
+# end
+  #   if @rating = Rating.find_by_id(params[:book_id])
+  #     @rating = @book.ratings.build(ratings_params)
+  #   else
+  #     @rating = Rating.new(rating_params)
+  #   end
+  # end
+    #@rating = Rating.new(rating_params)
+    
+    # @current_user.rating.build(rating_params)
+    # if @rating.save
     #   redirect_to rating_path(@rating)
     # else
-    #   #insert flash message here 
+    #   @book = Book.find_by_id(:book_id) if params[:book_id]
     #   render :new
+    #  @rating = Rating.new
+    #  if @rating.save
+    #    redirect_to rating_path(@rating)
+    #  else
+    #  insert flash message here 
+    #   render :new
+    #  end
     # end
-    end
-  end
 
   def new
     @rating = Rating.new
@@ -27,7 +71,7 @@ class RatingsController < ApplicationController
     if params[:book_id] && @book = Book.find_by_id(params[:book_id])
       #if so, we only want ratings of that book
       #pre associating the rating to the book if you come from a nested form 
-      @ratings = @book.ratings.build
+      @ratings = @book.ratings.new
       #if not
     else 
         @ratings = Rating.ordered_by_number
@@ -92,7 +136,7 @@ private
   end
 
   def rating_params
-    params.require(:rating).permit(:number, :comment)
+    params.require(:rating).permit(:book_id, :number, :comment)
   end
 
   # def redirect_if_not_owner

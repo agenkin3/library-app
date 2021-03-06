@@ -14,7 +14,8 @@ Book.create([
 ])
 
 Rating.create([
-{number: 3, comment: "this book is ok", book_id: 1, user_id: 1}
+{number: 3, comment: "this book is ok", book_id: 1, user_id: 1},
+{number: 2, comment: "this book is bad", book_id: 2, user_id: 1},
 ])
 
 User.create([

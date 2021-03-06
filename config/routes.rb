@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   #put new route above show route
   #root 'sessions#welcome'
   #get '/ratings/best,' to 'ratings#best', as: 'best_rating'
-  resources :ratings
+  resources :ratings, only: [:new, :create, :show, :index]
   resources :books, only: [:new, :create, :show, :index] do
     resources :ratings, shallow: true
   end
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   post '/', to: 'sessions#create'
+  post '/ratings/new', to: 'ratings#index'
   #get '/sessions', to: 'sessions#home' 
   
   #post '/ratings/best,' to 'ratings#best', as: 'best_rating'
