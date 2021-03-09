@@ -7,63 +7,8 @@ class RatingsController < ApplicationController
       redirect_to rating_path(@rating)
     else
       render :new
-  end
-
-    # @book = Book.find(params[:id])
-    # @rating = Rating.find(params[:id])
-    # @rating = @book.ratings.build(rating_params)
-    # @rating.book_id = @book.id
-    # @rating.user_id = current_user.id 
-    # if @rating.save
-    #   respond_to do |f|
-    #     f.html {redirect_to book_path(@book)}
-    #     f.json {render json: @rating, status: 201}
-    #   end
-    # else
-    #   render 'books/show'
-    # end 
+    end
   end 
-  #  #IDK HOW TO FIX THIS 
-  #  @rating = Rating.new(rating_params)
-  #  @rating
-  #  if @rating.save
-  #   redirect_to rating_path, notice: "Your rating was created"
-  #  else redirect_to ratings_path
-  # end
-
-
-
-#@rating = Rating.new(book_id: params[:book][:id], number:params[:rating][:number], comment:params[:rating][:comment])
-# @rating = Rating.new
-# @rating.user_id = session[:user_id]
-# if @rating.save
-# redirect_to rating_path
-# else
-# @rating.build
-# render :new
-# end
-  #   if @rating = Rating.find_by_id(params[:book_id])
-  #     @rating = @book.ratings.build(ratings_params)
-  #   else
-  #     @rating = Rating.new(rating_params)
-  #   end
-  # end
-    #@rating = Rating.new(rating_params)
-    
-    # @current_user.rating.build(rating_params)
-    # if @rating.save
-    #   redirect_to rating_path(@rating)
-    # else
-    #   @book = Book.find_by_id(:book_id) if params[:book_id]
-    #   render :new
-    #  @rating = Rating.new
-    #  if @rating.save
-    #    redirect_to rating_path(@rating)
-    #  else
-    #  insert flash message here 
-    #   render :new
-    #  end
-    # end
 
   def new
     @rating = Rating.new
@@ -89,23 +34,16 @@ class RatingsController < ApplicationController
   end
 
   def index
-    #@ratings = Rating.all
-    #is this a nested route?
-    
+    #first, check if this is a nested route 
     if params[:book_id] && @book = Book.find_by_id(params[:book_id])
     @ratings = @book.ratings.ordered_by_number
     else 
       @ratings = Rating.ordered_by_number
-    
       #access just ratings of this book
-
       #if so, we only want ratings of that book
-      #if not
-      #show all the ratings @ratings = Rating.ordered_by_number
+      #if not, show all the ratings @ratings = Rating.ordered_by_number
     end 
     end
-  
-
   
   def edit
     @rating = Rating.find(params[:id])
@@ -139,35 +77,5 @@ private
     params.require(:rating).permit(:book_id, :number, :comment)
   end
 
-  # def redirect_if_not_owner
-  #   if current_user != @rating.user
-  #     redirect_to user_path(current_user)
-  #   end
-  # end
-
 end
 
-
-
-
-# def index
-#   if params[:number]
-#     @rating = Rating.search_by_number(params[:number]).order_by_number
-#     @rating = Rating.order_by_number if @ratings == []
-#   else
-#     @ratings = Rating.order_by_number
-#   end
-# end
-
-# def show
-#   set_rating
-# end
-
-# def edit
-#   set_rating
-# end
-
-# def destroy
-#   set_rating
-#   @rating.destroy
-# end

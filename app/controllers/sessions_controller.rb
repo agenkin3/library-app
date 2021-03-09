@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     else
       flash[:message] = user.errors.full_messages.join("")
       redirect_to ratings_path
-    #block only runs ufit doesn't find by, nly runs if create by  
+    #block only runs ufit doesn't find by, only runs if create by  
       #provider = auth['provider']
     #name = auth['info']['name']
   end

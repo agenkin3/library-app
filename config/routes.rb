@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   resources :users
   get '/auth/:provider/callback', to: 'sessions#omniauth'
+  
   #new will render the form
   get '/login', to: 'sessions#new'
   #create will process the form once you submit it
