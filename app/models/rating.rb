@@ -1,8 +1,9 @@
 class Rating < ApplicationRecord
   validates :number, presence: true
+  validates :comment, presence: true
   belongs_to :user
   belongs_to :book
-  # scope :order_by_number, => {order(number: :desc)}
+  # could also do scope :order_by_number, => {order(number: :desc)}
   
 
   def self.ordered_by_number

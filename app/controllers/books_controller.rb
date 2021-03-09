@@ -35,6 +35,11 @@ def show
   @book = Book.find(params[:id])
 end
 
+def destroy 
+  @book.destroy
+  redirect_to root_path
+end 
+
 # def create
 #   #make a new shoe instance
 # @book = Book.new(book_params)
