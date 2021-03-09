@@ -54,7 +54,7 @@ class RatingsController < ApplicationController
   
   def update
     @rating = Rating.find(params[:id])
-    @rating.update(title:params[:rating][:number], author:params[:rating][:comment])
+    @rating.update(number:params[:rating][:number], comment:params[:rating][:comment])
     redirect_to rating_path(@rating)
   end
 
