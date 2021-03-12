@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   #route file gets read in order so it's important to
   #put new route above show route
-  #root 'sessions#welcome'
+  root 'sessions#welcome'
   #get '/ratings/best,' to 'ratings#best', as: 'best_rating'
   resources :ratings, only: [:new, :create, :show, :index]
   resources :books, only: [:new, :create, :show, :index] do

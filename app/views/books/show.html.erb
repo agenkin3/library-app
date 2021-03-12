@@ -1,5 +1,6 @@
+Book Show Page <br>
 
  Title: <%= @book.title %> <br>
  Author: <%= @book.author %> <br>
-
- <%= link_to("Make a new rating for #{@book.title}", new_book_rating_path(@book.id))  %>
+ <%= link_to("View all current ratings for #{@book.title}", book_ratings_path(@book.id))  %> <br>
+ <%= link_to("Make a new rating for #{@book.title} or another book", new_book_rating_path(@book.id))  %>

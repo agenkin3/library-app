@@ -1,30 +1,32 @@
 class UsersController < ApplicationController
-  # before_action :require_authorization, only: [:edit, :update]
-
+  #before_action :require_logged_in, only: [:show]
+  
 
  def index
+  #require_authorization
     @users = User.all
   end
 
-  # #loading the signup form  
+  #loading the signup form  
   def new
   @user = User.new
   end
   
   def show
     @user = User.find(params[:id])
+    #@user_books = @user.books
   end
 
-  # #signup
+  #signup
   def create
     @user = User.create(params.require(:user).permit(:email, :username,        
    :password))
    if @user.save
    session[:user_id] = @user.id
-   #flash[:notice] = "Account successfully created!  Welcome, #{@user.username}!"
+   flash[:notice] = "Account successfully created!  Welcome, #{@user.username}!"
    redirect_to users_path(@user)
    else
-    #flash[:error] = "Error: User not created: " + @user.errors.full_messages.to_sentence
+    flash[:error] = "Error: User not created: " + @user.errors.full_messages.to_sentence
     render :new
     end
 
@@ -69,10 +71,10 @@ class UsersController < ApplicationController
   end
   
   # def require_authorization
-  #   unless current_user.can_edit_user? @user
-  #     flash[:alert] = "You are not authorized for that function."
-  #     redirect_back(fallback_location: root_url)
-  #   end
+  # unless current_user.can_edit_user? @user
+  # flash[:alert] = "You are not authorized for that function."
+  # redirect_back(fallback_location: root_url)
+  # end
   # end
 
   end

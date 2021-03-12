@@ -34,12 +34,11 @@ end
   end
 end 
 
+#logout
 def destroy
-  session.delete([:user_id])
-  redirect_to '/login'
-end
-
-
+  session.clear
+  redirect_to '/'
+  end
 
 
 #     #create a session here 
@@ -52,11 +51,13 @@ end
 #   end
 # end
 
-#   #logout
-#   def destroy
-#     session.clear
-#     redirect_to '/'
-#   end
+
+
+#logout
+# def destroy
+#   session.delete([:user_id])
+#   redirect_to root_path
+# end
 
 private
 

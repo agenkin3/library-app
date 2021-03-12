@@ -4,3 +4,5 @@ Book Title: <%= @rating.book.title %>
 Rating: <%= @rating.number %> <br>
 Comment: <%= @rating.comment %> <br>
 
+
+<%= link_to("Edit Existing Rating", edit_rating_path(@rating)) %>

@@ -1,13 +1,10 @@
 <h1> Book Index </h1>
 
  <% @books.each do |book| %>
- <%= book.title %> 
+ <%= link_to(book.title, book_ratings_path(book)) %>
  
- 
-
 <br>
 
-
-
 <% end %> 
-
+<br>
+<%= link_to("Create New Book", new_book_path) %>

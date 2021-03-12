@@ -6,9 +6,12 @@ Rating:
 <%= rating.number %>  
 <br>
 Additional Comment:  <%= rating.comment %> <br>
+Who left this rating: <%= rating.user.username %> <br>
+<%= link_to("Edit Rating", edit_rating_path(rating)) %> <br>
 <% end %> 
 <br>
-<%= link_to("Create Rating", new_rating_path) %>
+<%= link_to("Create New Rating", new_rating_path) %>
+<br>
 
 
-#partials don't work
+ <br>
