@@ -1,6 +1,11 @@
-<h1> Welcome to Library App (This is the user show page) <h1>
+<h1> Welcome to the Library App <h1>
 
  Your username: <%= @user.username %> <br>
- Your emai: <%= @user.email %> <br>
+ Your email: <%= @user.email %> <br>
 
  You have rated <%=@user.ratings.count %> book(s)<br> <br>
+
+ <%= link_to("View all books", books_path) %> <br>
+
+
+

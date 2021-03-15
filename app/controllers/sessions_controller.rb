@@ -25,6 +25,8 @@ end
   #the authenticate method comes from has secure password
   #taking it a string and making sure it matches the password digest
   if u && u.authenticate(params[:password])
+    #if there is a user, u, with the email that the user entered, and u exists and is authenticated with the password
+    # create a new session with the user ID 
     #line that actually logs in user
     session[:user_id] = u.id
     redirect_to user_path(u)

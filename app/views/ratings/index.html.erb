@@ -1,6 +1,9 @@
+
 <% display_header(@book) %>
 <% @ratings.each do |rating| %> <br>
-Title: <%= rating.book.title %> 
+  <%= link_to("All Ratings for this book", book_ratings_path(rating)) %>
+<br>Title: <%= rating.book.title %> <br>
+Book ID: <%=rating.book.id %>
 <br> 
 Rating: 
 <%= rating.number %>  
@@ -8,6 +11,8 @@ Rating:
 Additional Comment:  <%= rating.comment %> <br>
 Who left this rating: <%= rating.user.username %> <br>
 <%= link_to("Edit Rating", edit_rating_path(rating)) %> <br>
+
+<br>
 <% end %> 
 <br>
 <%= link_to("Create New Rating", new_rating_path) %>

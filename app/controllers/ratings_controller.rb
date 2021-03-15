@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
   #before_action :set_rating, :redirect_if_not_owner, only: [:show, :edit, :update, :destroy]
-  before_action :require_logged_in
+  before_action :require_logged_in, :set_rating, except: [:index]
   
   
   def create
@@ -38,9 +38,11 @@ class RatingsController < ApplicationController
     #first, check if this is a nested route 
     #access just ratings of this book
     #if so, we only want ratings of that book
-    if params[:book_id] && @book = Book.find_by_id(params[:book_id])
-    @ratings = @book.ratings.ordered_by_number
+    if params[:book_id] && @book = Book.find_by_id(params[:book_id]) 
+      @ratings = @book.ratings.ordered_by_number
     else 
+      #flash[:message] = "This book does not exist! Here are all ratings."
+      
       @ratings = Rating.ordered_by_number
       #if not, show all the ratings @ratings = Rating.ordered_by_number
     end 
@@ -49,8 +51,8 @@ class RatingsController < ApplicationController
   def edit
     @rating = Rating.find(params[:id])
     if current_user != @rating.user
-      flash[:message] = "You did not create this rating"
-      redirect_to user_path(current_user) 
+      flash[:message] = "You can't edit a rating you did not create."
+      redirect_to rating_path(current_user) 
     end
     end
   
@@ -72,7 +74,7 @@ class RatingsController < ApplicationController
 private
 
   def set_rating
-    rating = Rating.find(params[:id])
+    @rating = Rating.find(params[:id])
   end
 
   def rating_params

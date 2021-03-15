@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   #signup
   def create
+    
     @user = User.create(params.require(:user).permit(:email, :username,        
    :password))
    if @user.save
