@@ -1,6 +1,7 @@
 class RatingsController < ApplicationController
   #before_action :set_rating, :redirect_if_not_owner, only: [:show, :edit, :update, :destroy]
-  before_action :require_logged_in, :set_rating, except: [:index]
+  before_action :require_logged_in
+  before_action :set_rating, except: [:index, :new, :create]
   
   
   def create

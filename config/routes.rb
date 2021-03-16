@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   post '/', to: 'sessions#create'
   post '/ratings/new', to: 'ratings#index'
+
   #get '/sessions', to: 'sessions#home' 
   
   #post '/ratings/best,' to 'ratings#best', as: 'best_rating'
