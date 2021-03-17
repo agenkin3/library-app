@@ -22,7 +22,7 @@ def update
 end
 
 def create
-  #make a new shoe instance
+  
   #@book = Book.new(book_params)
   #@book = Book.new(title:params[:book][:title], author:params[:book][:author])
     @book = current_user.books.build(book_params)
