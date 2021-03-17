@@ -1,7 +1,7 @@
 class RatingsController < ApplicationController
   #before_action :set_rating, :redirect_if_not_owner, only: [:show, :edit, :update, :destroy]
   before_action :require_logged_in
-  before_action :set_rating, except: [:index, :new, :create]
+  before_action :set_rating, except: [:index, :new, :create, :destroy]
   
   
   def create
@@ -64,9 +64,17 @@ class RatingsController < ApplicationController
   end
 
   def destroy
-    @rating.destroy
-    redirect_to ratings_path
-  end
+    @rating = Rating.find(params[:id])
+   
+    
+    if current_user == @rating.user
+      @rating.destroy
+    else
+      flash[:message] = "You can't edit a rating you did not create."
+    end
+    redirect_to user_path(current_user) 
+    
+end
     
   def highest
     @rating = Rating.ordered_by_number.first
