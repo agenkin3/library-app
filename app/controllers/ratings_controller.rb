@@ -45,6 +45,7 @@ class RatingsController < ApplicationController
   end
 
   def index
+    
     #first, check if this is a nested route 
     #access just ratings of this book
     #if so, we only want ratings of that book

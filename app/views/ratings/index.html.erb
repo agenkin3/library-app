@@ -13,7 +13,9 @@ Who left this rating: <%= rating.user.username %> <br>
 <%= button_to "Delete this rating", rating, :method => :delete %>
 <%= link_to("Edit Rating", edit_rating_path(rating)) %> <br>
 
+
 <br>
 <% end %> 
 <br>
-<%= link_to("Create New Rating", new_book_rating_path) %>
+
+<%= link_to("Add New Rating", new_book_rating_path) %>

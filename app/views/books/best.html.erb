@@ -1,7 +1,13 @@
-The book you are looking for doesnt exist. 
-
-Here are all ratings and book (should this be average, just over one number, etc)
-
-  <%= books.ordered_by_number %>
+<%= display_header(@book) %>
+<% @ratings.each do |rating| %> 
   
- <br>
+<br>Title: <%= rating.book.title %> <br>
+Book ID: <%=rating.book.id %>
+<br> 
+Rating: 
+<%= rating.number %>  
+<br>
+Additional Comment:  <%= rating.comment %> <br>
+Who left this rating: <%= rating.user.username %> <br>
+<%= button_to "Delete this rating", rating, :method => :delete %>
+<%= link_to("Edit Rating", edit_rating_path(rating)) %> <br>

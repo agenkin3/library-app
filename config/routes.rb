@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   
   #new will render the form
   get '/login', to: 'sessions#new'
+  get '/best', to:'books#best'
   #get '/best', to 'books#best'
   #create will process the form once you submit it
   get '/logout', to: 'sessions#destroy'
