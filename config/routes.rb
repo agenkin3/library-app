@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   resources :users
   get '/auth/:provider/callback', to: 'sessions#omniauth'
-  
+  get 'sort' => 'books#sort'
   #new will render the form
   get '/login', to: 'sessions#new'
   get '/best', to:'books#best'

@@ -2,11 +2,15 @@ class BooksController < ApplicationController
   before_action :require_logged_in
 
 def index
-  @books = Book.order(:title)
+  #@books = Book.order(:title)
+  @books = Book.all
   #@rating = book.rating
   #not a button will this be ok?
 end
 
+def sort
+  @books = Book.order(:title)
+end
 
 def new
   @book = Book.new
