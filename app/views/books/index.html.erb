@@ -1,7 +1,7 @@
 <h1> Book Index </h1>
 
  <% @books.each do |book| %>
- <%= link_to(book.title, book_ratings_path(book)) %>
+ <%= link_to(book.title, book_ratings_path(book.id)) %>
  
 <br>
 

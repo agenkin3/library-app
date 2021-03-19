@@ -3,12 +3,14 @@ class BooksController < ApplicationController
 
 def index
   @books = Book.order(:title)
+  #@rating = book.rating
   #not a button will this be ok?
 end
 
 
 def new
   @book = Book.new
+  #@book.ratings.build
 end
 
 def edit

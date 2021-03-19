@@ -3,6 +3,7 @@ class Rating < ApplicationRecord
   validates :comment, presence: true
   belongs_to :user
   belongs_to :book
+  accepts_nested_attributes_for :book
   # could also do scope :order_by_number, => {order(number: :desc)}
   
 

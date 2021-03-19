@@ -1,4 +1,5 @@
 <h1>Create a Rating</h1>
+<%= render partial: "form" %>
 
 Please use a number from 1-10 for your Rating <br> <br>
 
@@ -6,6 +7,7 @@ Please use a number from 1-10 for your Rating <br> <br>
   <%= f.label :book %>
   
   <%= f.collection_select :book_id, Book.order(:title),:id,:title, include_blank: true %>
+  
   <%= f.label :number %>
   <%= f.text_field :number%>
   <%= f.label :comment %>
@@ -15,3 +17,4 @@ Please use a number from 1-10 for your Rating <br> <br>
   <% end %> 
  <br>
 <%= link_to("My Book Isn't Listed. I want to create a new book first.", new_book_path) %>
+<%= link_to("Back", ratings_path) %>

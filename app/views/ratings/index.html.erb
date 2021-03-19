@@ -1,5 +1,5 @@
-<h2> Here are all the ratings:  </h2>
-<% display_header(@book) %>
+
+<%= display_header(@book) %>
 <% @ratings.each do |rating| %> 
   
 <br>Title: <%= rating.book.title %> <br>
@@ -16,8 +16,4 @@ Who left this rating: <%= rating.user.username %> <br>
 <br>
 <% end %> 
 <br>
-<%= link_to("Create New Rating", new_rating_path) %>
-<br>
-
-
- <br>
+<%= link_to("Create New Rating", new_book_rating_path) %>

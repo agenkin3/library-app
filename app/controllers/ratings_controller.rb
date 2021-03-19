@@ -5,7 +5,10 @@ class RatingsController < ApplicationController
   
   
   def create
+    @book = params[:book_id] && @book = Book.find_by_id(params[:book_id])
+    #@rating.book_id = @book_id
     @rating = current_user.ratings.build(rating_params)
+    
     if @rating.save
       #both .save and .valid will run the validations and populate the errors
       #redirect is a new get request so it's a new instance of the controller
@@ -17,15 +20,21 @@ class RatingsController < ApplicationController
   end 
 
   def new
-    @rating = Rating.new
+    #@rating = Rating.new
     #check if this is a nested route?
     if params[:book_id] && @book = Book.find_by_id(params[:book_id])
+      @rating = @book.ratings.build
+      #@rating.book = @book
+      #@rating = Rating.new(brand_id: params(:build_id))
+      #what are some ways we can make a new shoe and associate it with a brand
       #if so, we only want ratings of that book
       #access just ratings of this book
       #pre associating the rating to the book if you come from a nested form 
-      @ratings = @book.ratings.new
+      #@ratings = @book.ratings.ordered_by_number
     else 
-        @ratings = Rating.ordered_by_number
+        ##@ratings = Rating.ordered_by_number
+        @rating = Rating.new
+        @rating.build_book
         #if not
         #show all the ratings @ratings = Rating.ordered_by_number
       end 

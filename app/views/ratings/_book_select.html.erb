@@ -1,0 +1,5 @@
+<%= f.label :book %>
+<%= f.collection_select :book_id, Book.all, :id, :title, prompt: true %>
+
+
+<% end %>

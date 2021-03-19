@@ -1,0 +1,21 @@
+
+<%= form_for([@book, @rating]) do |f| %>
+
+  <%= f.label :title %> <br>
+  <% if defined? (@book.id) %>
+
+  <% else %>
+  <%= f.collection_select :book_id %>
+  <% end %>
+   <br> <br>
+   Please use a number from 1-10 for your Ratings <br><br>
+   <%= f.label :number %> <br>
+    <%= f.text_field :number%> <br>
+    <%= f.label :comment %> <br>
+    <%= f.text_field :comment%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
